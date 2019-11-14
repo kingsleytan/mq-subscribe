@@ -1,21 +1,16 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
-	"context"
 	"time"
 
-	"github.com/streadway/amqp"
 	"github.com/mailgun/mailgun-go/v3"
-
+	"github.com/streadway/amqp"
 )
-
-func init() {
-	fmt.Println("Env:", os.Getenv("ENV"))
-}
 
 type input struct {
 	ID           string `json:"id" validate:"required"`
@@ -46,7 +41,6 @@ type output struct {
 }
 
 func main() {
-
 	var i *input
 	conn, err := amqp.Dial("amqp://setucdwc:8HPqKaOisQhptp7HARM0S1rUaQeAw2LU@cougar.rmq.cloudamqp.com/setucdwc")
 	failOnError(err, "Failed to connect to RabbitMQ")
@@ -100,7 +94,7 @@ func main() {
 // 	fmt.Println("os.GetEnv", os.Getenv("DOMAIN"))
 // }
 
-func sendEmail(m *input){
+func sendEmail(m *input) {
 	templateName := m.Template
 	mg := mailgun.NewMailgun(os.Getenv("DOMAIN"), os.Getenv("MAILGUN_KEY"))
 
@@ -135,7 +129,7 @@ func sendEmail(m *input){
 	// r.TemplateData.Body = m.TemplateData.Body
 	// r.Template = m.Template
 	// r.ReferenceID = m.ReferenceID
-	
+
 	// return map[string]interface{}{
 	// 	"item":   r,
 	// 	"result": fmt.Sprintf("result: %s", result),

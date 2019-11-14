@@ -1,5 +1,5 @@
 # MQ Subscribe
-This application is to be paired with [MQ Subscribe](https://github.com/kingsleytan/mq-publish)
+This application is to be paired with [MQ Publish](https://github.com/kingsleytan/mq-publish)
 
 1. Install dependencies:
 ```go get github.com/streadway/amqp```
